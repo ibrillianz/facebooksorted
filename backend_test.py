@@ -10,18 +10,6 @@ class NeurodivergentOrganizerAPITest(unittest.TestCase):
         super().__init__(*args, **kwargs)
         self.base_url = "https://d480c7e2-e1c5-47c8-8246-6651cb63cf13.preview.emergentagent.com"
         self.test_content_id = None
-        self.tests_run = 0
-        self.tests_passed = 0
-
-    def setUp(self):
-        self.tests_run += 1
-
-    def tearDown(self):
-        if hasattr(self, '_outcome'):
-            result = self.defaultTestResult()
-            self._feedErrorsToResult(result, self._outcome.errors)
-            if result.wasSuccessful():
-                self.tests_passed += 1
 
     def test_01_health_check(self):
         """Test the health check endpoint"""
@@ -213,9 +201,6 @@ def run_tests():
     
     runner = unittest.TextTestRunner(verbosity=2)
     result = runner.run(suite)
-    
-    test_instance = NeurodivergentOrganizerAPITest()
-    print(f"\n📊 Tests passed: {test_instance.tests_passed}/{test_instance.tests_run}")
     
     return 0 if result.wasSuccessful() else 1
 
